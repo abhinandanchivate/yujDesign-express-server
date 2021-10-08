@@ -11,7 +11,10 @@ routes.get("/test", (req, res) => {
 // desc : register the user ===> new Record ===> get/post/delete/put
 // @access : public
 routes.post("/register", (req, res) => {
-  res.json(req.body.name);
+  // do we need to validate the data or not?
+  //===> from here data will go to DB(mongodb)
+  // to validate the data
+  res.json(req.body);
 });
 
 module.exports = routes;
