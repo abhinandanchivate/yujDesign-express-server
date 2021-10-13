@@ -3,6 +3,7 @@ const express = require("express");
 
 const users = require("./routes/api/users/user");
 const posts = require("./routes/api/posts/posts");
+const auth = require("./routes/api/auth/auth");
 const comments = require("./routes/api/comments/comments");
 const bodyParser = require("body-parser");
 const app = express();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 // do we need to map our custom parts/ modules with our server
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 app.use("/api/posts", posts);
 app.use("/api/comments", comments);
 
