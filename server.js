@@ -1,6 +1,8 @@
 const express = require("express");
 // we have loaded the express module,
 
+const mongoose = require("mongoose");
+const dbURL = require("./config/key").mongoURI;
 const users = require("./routes/api/users/user");
 const posts = require("./routes/api/posts/posts");
 const auth = require("./routes/api/auth/auth");
@@ -16,6 +18,11 @@ const app = express();
 // express middleware are teh functions that excutes during the lifecycle of a request to the expess server.
 
 app.use(express.json());
+
+mongoose
+  .connect(dbURL)
+  .then(() => console.log("mongodb connected"))
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
   res.json({ msg: "hello from abhi" });

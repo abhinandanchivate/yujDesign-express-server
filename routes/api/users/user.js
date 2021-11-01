@@ -3,7 +3,12 @@ const express = require("express");
 const routes = express.Router();
 // express ===> do we need to load the express module?
 
+const User = require("../../../model/User");
+// are we refering our models to the
+
 const { check, validationResult } = require("express-validator");
+
+const bcrypt = require("bcryptjs");
 
 // load input validations
 //const registerInputValidations = require("../../../validation/registerValidation");
@@ -24,14 +29,27 @@ routes.post(
     // do we need to validate the data or not?
     // const { errors, isValid } = registerInputValidations(req.body);
 
-    console.log(isValid);
+    //console.log(isValid);
     // check validations
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
     //===> from here data will go to DB(mongodb)
     // to validate the data
-    else return res.json(req.body);
+    //else {
+    const newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      avatar: req.body.avatar,
+    });
+
+    newUser
+      .save()
+      .then((user) => res.json(user))
+      .catch((err) => console.log(err));
+
+    //res.json(req.body);
   }
 );
 

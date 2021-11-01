@@ -16,6 +16,8 @@ router.post(
     }
 
     const { email, password } = req.body;
+    // store that data in DB ===> mongodb
+    //
 
     return res.json({ email: email, password: password });
   }
